@@ -124,6 +124,10 @@ kubectl get nodes
 
 ```bash
 minikube addons enable dashboard
+
+# Wait until the Dashboard Pod is ready before port-forwarding
+kubectl wait --for=condition=Ready pod -l app.kubernetes.io/name=kubernetes-dashboard -n kubernetes-dashboard --timeout=40s
+
 kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 8080:80
 # Click Web Preview → Preview on Port 8080
 ```
